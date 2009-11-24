@@ -1,0 +1,20 @@
+=========
+FEATURES
+=========
+
+* Blog: Any blog with pre-requisite permissions can blog.
+* Statistics: Ability to report statistics regarding registrations,
+  delegates, talks etc.
+* Talks: Ability to accept talks, display talks.
+* Schedule: Schedule talks in different halls on different conference
+  days.
+* Static Pages: Add static pages (also called Flatpages) very easily
+  for static content.
+* Simple flexible menu system: Has a simple menu system where a user
+  enters a tab name and a URL to add menus dynamically. This feature
+  currently violates DRY and might undergo some improvement with time.
+* Deadline feature: Add deadlines for important events and disable 
+  processes on completion of deadlines. No need to remember to disable
+  features manually!
+* More features coming up. Check the ``docs/TODO.txt`` and feel free to
+  contribute.
