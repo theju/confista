@@ -50,6 +50,11 @@ Post-installation
 
     $ python manage.py runserver
 
+* [Optional] Load the initial sample data provided with Confista_
+  available under fixtures.
+
+    $ python manage.py loadata fixtures/initial_data.json
+
 .. _here: http://github.com/theju/confista/tree/master
 .. _git: http://git-scm.com/
 .. _virtualenv: http://pypi.python.org/pypi/virtualenv
