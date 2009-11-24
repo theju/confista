@@ -8,6 +8,10 @@ List of items that will improve Confista:
   talks can be easily dragged and dropped rather
   than filling up a form.
 
+* Make use of pinax's awesome notifications for
+  notifications about talks, delegates registration,
+  schedule posting etc.
+
 * Id-card generation mechanism.
 
 * Probably a CMS instead of using Flatpages.
