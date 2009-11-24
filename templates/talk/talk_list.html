@@ -1,0 +1,64 @@
+{% extends "site_base.html" %}
+
+{% block subnav %}
+<ul>
+  <li><a href="{% url talk_add_talk %}">Add Talk</a></li>
+</ul>
+{% endblock %}
+
+{% block body %}
+<h1>Talks</h1>
+<h3>List of all talks</h3>
+<table>
+  <tr>
+    <th>
+      Title
+    </th>
+    <th>
+      Topic
+    </th>
+    <th>
+      Speakers
+    </th>
+    <th>
+      Level
+    </th>
+    <th>
+      Tags
+    </th>
+    <th>
+      Accepted
+    </th>
+    <th>
+      Scheduled
+    </th>
+  </tr>
+{% for talk in talks %}
+  <tr>
+    <td>
+      <a href="{% url talk_list_id talk.id %}">{{ talk.title }}</a>
+    </td>
+    <td>
+      {{ talk.topic }}
+    </td>
+    <td>
+      {% for speaker in talk.co_speakers.all %}
+      {{ speaker }}{% if not forloop.last %},{% endif %}
+      {% endfor %}
+    </td>
+    <td>
+      {{ talk.level }}
+    </td>
+    <td>
+      {{ talk.tags }}
+    </td>
+    <td>
+      {{ talk.accepted }}
+    </td>
+    <td>
+      {{ talk.scheduled }}
+    </td>
+  </tr>
+{% endfor %}
+</table>
+{% endblock %}

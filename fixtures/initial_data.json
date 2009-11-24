@@ -1,0 +1,83 @@
+[
+    {
+        "pk": 1, 
+        "model": "talk.level", 
+        "fields": {
+            "name": "Beginner"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "talk.level", 
+        "fields": {
+            "name": "Moderate"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "talk.level", 
+        "fields": {
+            "name": "Advanced"
+        }
+    },
+    {
+        "pk": 1, 
+        "model": "menu.menu_item", 
+        "fields": {
+            "login_to_view": true, 
+            "open_in_new_window": false, 
+            "link": "/profiles/", 
+            "name": "Profile"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "menu.menu_item", 
+        "fields": {
+            "login_to_view": true, 
+            "open_in_new_window": false, 
+            "link": "/notices/", 
+            "name": "Notices"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "menu.menu_item", 
+        "fields": {
+            "login_to_view": false, 
+            "open_in_new_window": false, 
+            "link": "/blog/", 
+            "name": "Blog"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "menu.menu_item", 
+        "fields": {
+            "login_to_view": false, 
+            "open_in_new_window": false, 
+            "link": "/talk/all/", 
+            "name": "Talks"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "menu.menu_item", 
+        "fields": {
+            "login_to_view": false, 
+            "open_in_new_window": false, 
+            "link": "/schedule/", 
+            "name": "Schedule"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "menu.menu_item", 
+        "fields": {
+            "login_to_view": false, 
+            "open_in_new_window": false, 
+            "link": "/statistics/all/", 
+            "name": "Statistics"
+        }
+    }
+]

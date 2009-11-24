@@ -1,0 +1,39 @@
+{% extends "site_base.html" %}
+{% load i18n %}
+
+{% block body %}
+
+<h2>{% trans "Schedule" %}</h2>
+
+{% for conf_day,day in schedule_data %}
+<h3>Schedule on {{ conf_day.date|date:"d F,Y" }}</h3>
+<table border="1">
+  <tr>
+    <th>Time</th>
+    {% for hall in halls %}
+    <th>{{ hall.name }}</th>
+    {% endfor %}
+  </tr>
+  {% for time_int,time_slot in day %}
+  <tr>
+    <td>{{ time_int }}</td>   
+    {% for hall in time_slot %}
+      {% if hall %}
+         {% ifnotequal hall 1 %}
+            {% for item,num_slots in hall %}
+              <td rowspan="{{ num_slots }}">
+		<a href="{% url talk_list_id item.talk.id %}">{{ item.talk.title }}</a>
+	      </td> 
+            {% endfor %}
+         {% endifnotequal %}
+      {% else %}
+        <td></td>
+      {% endif %}
+    {% endfor %}
+  </tr>
+  {% endfor %}
+</table>
+<br />
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+<h3>{{ SITE_NAME }} Statistics</h3>
+
+<div>
+  <p>Total number of registered delegates : {{ num_delegates }}</p>
+  <p>Total number of talks : {{ num_talks }}</p>
+
+  {% if num_talks %}
+
+  <h4>Talk statistics by level</h4>
+  <table>
+    <tr>
+      <th>
+	Level
+      </th>
+      <th>
+	Number
+      </th>
+    </tr>
+  {% for level,num in num_talks_by_level %}
+  <tr>
+    <td>
+      {{ level }}
+    </td>
+    <td>
+      {{ num }}
+    </td>
+  </tr>
+  {% endfor %}
+  </table>
+
+  <h4>Talk statistics by topic</h4>
+  <table>
+    <tr>
+      <th>
+	Topic
+      </th>
+      <th>
+	Number
+      </th>
+    </tr>
+  {% for topic,num in num_talks_by_topic %}
+  <tr>
+    <td>
+      {{ topic }}
+    </td>
+    <td>
+      {{ num }}
+    </td>
+  </tr>
+  {% endfor %}
+  </table>
+
+  {% endif %}
+
+  {% if num_delegates %}
+
+  <h4>Delegate statistics by occupation</h4>
+  <table>
+    <tr>
+      <th>
+	Occupation
+      </th>
+      <th>
+	Number
+      </th>
+    </tr>
+  {% for occupation,num in num_delegates_by_occupation %}
+  <tr>
+    <td>
+      {{ occupation }}
+    </td>
+    <td>
+      {{ num }}
+    </td>
+  </tr>
+  {% endfor %}
+  </table>
+
+  <h4>Delegate statistics by location</h4>
+  <table>
+    <tr>
+      <th>
+	Location
+      </th>
+      <th>
+	Number
+      </th>
+    </tr>
+  {% for location,num in num_delegates_by_location %}
+  <tr>
+    <td>
+      {{ location }}
+    </td>
+    <td>
+      {{ num }}
+    </td>
+  </tr>
+  {% endfor %}
+  </table>
+
+  {% endif %}
+{% endblock %}

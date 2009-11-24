@@ -1,0 +1,10 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+<p>
+  {{ descr }}<br />
+  Talk submission expired on {{ expiry|date }}.<br />
+  Please keep a look out for important dates in
+  the future. We hope you don't miss out further!
+</p>
+{% endblock %}

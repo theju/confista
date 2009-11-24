@@ -1,0 +1,9 @@
+{% extends "blog/base.html" %}
+
+{% block body %}
+<h3>Oops!!!</h3>
+<p>
+  The user ({{ request.user }}) does not have  permissions 
+  to manipulate the blog.
+</p>
+{% endblock %}
