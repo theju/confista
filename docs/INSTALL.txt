@@ -2,6 +2,11 @@
 INSTALL
 ========
 
+Confista_ has only one dependency in Pinax_.
+So, first install_ Pinax_ according to the docs provided.
+
+.. _install: http://pinaxproject.com/docs/dev/install.html
+
 Plain install
 --------------
 
