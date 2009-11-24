@@ -12,6 +12,8 @@ List of items that will improve Confista:
   notifications about talks, delegates registration,
   schedule posting etc.
 
+* Also add feeds apart from notifications.
+
 * Id-card generation mechanism.
 
 * Probably a CMS instead of using Flatpages.
