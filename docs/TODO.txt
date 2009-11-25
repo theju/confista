@@ -22,7 +22,10 @@ List of items that will improve Confista:
 
 * Comments (Threaded-comment is already available in Pinax).
 
-* Admin actions for some common processes.
+* Admin actions for some common processes. Requires latest
+  django.
+
+* Some design changes. Probably a new logo.
 
 * Wiki. Pinax already has a wiki but most conferences might
   require powerful wikis. To be frank, I haven't used the 
