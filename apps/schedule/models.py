@@ -7,7 +7,9 @@ class Day(models.Model):
     end_time   = models.TimeField()
 
     def __unicode__(self):
-        return self.date.strftime("%d-%B-%Y") 
+        return "%s (%s - %s)" %(self.date, 
+                                self.start_time,
+                                self.end_time)
 
     class Meta:
        ordering = ["date",]
@@ -18,8 +20,7 @@ class Hall(models.Model):
     capacity = models.PositiveIntegerField()
 
     def __unicode__(self):
-        return "%s : %s" %(self.name,self.capacity)
-    
+        return "%s : %s" %(self.name, self.capacity)
 
 class Slot(models.Model):
     day        = models.ForeignKey(Day, related_name="conf_day")
@@ -36,6 +37,6 @@ class Slot(models.Model):
     
     def __unicode__(self):
         return "%s on %s starting at %s at %s" %(self.talk.title,
-                                                 self.day.date.strftime("%d %B,%Y"),
-                                                 self.start_time.strftime("%H:%M %p"),
+                                                 self.day.date,
+                                                 self.start_time,
                                                  self.hall.name)
