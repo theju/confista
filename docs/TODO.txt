@@ -31,4 +31,8 @@ List of items that will improve Confista:
   require powerful wikis. To be frank, I haven't used the 
   in-built Pinax wiki. It might just fit in perfectly.
 
+* Add i18n. I don't have a proper idea to go about this. But
+  would like to get it done to support as many languages as
+  possible.
+
 * Other items...(will add them as and when I recollect).
