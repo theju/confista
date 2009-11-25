@@ -42,7 +42,7 @@ def talk_added(sender, instance=None, **kwargs):
 def talk_accepted(sender, instance=None, **kwargs):
     if notification and not kwargs['created'] and instance.accepted:
         users = [ii.user for ii in notification.NoticeSetting.objects.filter(notice_type__lable='talk_accepted')]
-        notification.send(users, "talk_accepted", {"descr": "Talk with title \"%s\" accepted" %instance.title)
+        notification.send(users, "talk_accepted", {"descr": "Talk with title \"%s\" accepted" %instance.title})
 
 def talk_scheduled(sender, instance=None, **kwargs):
     if notification and not kwargs['created'] and instance.scheduled:
