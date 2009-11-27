@@ -1,0 +1,104 @@
+{% extends "blog/base.html" %}
+
+{% load i18n %}
+{% load humanize %}
+{% load threadedcommentstags %}
+{% load gravatar %}
+{% load tagging_tags %}
+{% load blog_tags %}
+{% load theme_tags %}
+{% load uni_form %}
+{% load pagination_tags %}
+
+{% block head_title %}{% blocktrans %}Blog Post{% endblocktrans %} : {{ post.title }}{% endblock %}
+
+{% block extra_head %}
+    <link rel="alternate" type="application/atom+xml" title="Blog Post Feed for All Users" href="/blog/feed/" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Post Feed for User {{ post.author.username }}" href="/blog/feed/{{ post.author.username }}/" />
+{% endblock %}
+
+{% block body %}
+    
+    <div class="blog-post">
+        <h2>{{ post.title }}</h2>
+        <div class="blog-meta"><p>Posted by: <a href="{% url profile_detail post.author.username %}">{{ post.author.username }}</a> on {{ post.publish|date }}</p></div>
+        <div class="blog-tags">
+            <p>{% silk "tag_blue" %}
+            {% tags_for_object post as tags %}
+            {% for tag in tags %}
+                <a href="/tags/{{ tag }}">{{ tag }}</a>
+            {% endfor %}</p>
+            {% ifequal post.author request.user %}
+                <a href="{% url blog_edit post.id %}">Edit Post</a>
+            {% endifequal %}
+        </div>
+        
+        {% show_blog_post post %}
+        
+    </div>
+
+    {% get_threaded_comment_tree for post as comments %}
+    {% autopaginate comments %}
+
+    <ul class="comments">
+      {% for comment in comments %}
+      <li class="{% cycle even,odd %} thread-{{ comment.depth }} clearfix">
+        <div class="meta">
+          <div class="avatar">{% gravatar_img_for_email comment.user.email 40 %}</div>
+          <div class="details"><a href="{% url profile_detail username=comment.user.username %}">{{ comment.user }}</a></div>
+          {{ comment.date_submitted|date }}
+        </div>
+        <div class="bulk">
+          <div class="body">{{ comment.comment|urlize|linebreaks }}</div>
+          {% ifequal user comment.user %}
+          <form method="POST" action="{% url tc_comment_delete comment.object_id %}">
+            <input type="submit" value="{% trans "Delete Comment" %}" />
+            <input type="hidden" name="next" value="{{ request.path }}" />
+          </form>
+          {% endifequal %}
+          <a href="javascript:toggle_comment_form({{ comment.id }})">{% trans "Reply to This Comment" %}</a>
+          <form style="display: none" method="POST" action="{% get_comment_url post comment %}" id="comment_form_{{ comment.id }}">
+            <table><tr><td><textarea id="id_comment" rows="10" cols="40" name="comment"></textarea></td></tr>
+              <tr><td><input type="submit" value="{% trans "Post Comment" %}" /></td></tr></table>
+            <input type="hidden" name="next" value="{{ request.path }}" />
+          </form>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% paginate %}
+
+    {% if user.is_authenticated %}
+    <fieldset class="inlineLabels">
+      <form class="uniForm" method="POST" action="{% get_comment_url post %}">
+        <div class="ctrlHolder">
+          <label for="id_comment">Comment on the post</label>
+          <textarea id="id_comment" rows="10" cols="40" name="comment"></textarea>
+        </div>
+        <div class="form_block">
+          <input type="hidden" name="next" value="{{ request.path }}" />
+          <input type="submit" value="{% trans "Post Comment" %}" />
+        </div>
+      </form>
+    </fieldset>
+    {% else %}
+    {% url acct_login as acct_login_url %}
+    {% url acct_signup as acct_signup_url %}
+    {% blocktrans %}
+    <h3>Please <a href="{{ acct_login_url }}">Login</a> (or <a href="{{ acct_signup_url }}">Sign Up</a>) to leave a comment</h3>
+    {% endblocktrans %}
+    {% endif %}
+
+<script type="text/javascript">
+  function toggle_comment_form(formId) {
+    var commentForm = document.getElementById('comment_form_'+formId);
+    if (commentForm.style.display == 'none') {
+      commentForm.style.display = '';
+    }
+    else {
+      commentForm.style.display = 'none';
+    }
+  }
+</script>    
+{% endblock %}
