@@ -47,7 +47,7 @@ def create_profile(sender, instance=None, **kwargs):
 def delegate_registered(sender, instance=None, **kwargs):
     if notification and kwargs['created']:
         users = [ii.user for ii in notification.NoticeSetting.objects.filter(notice_type__label="delegate_registered")]
-        notification.send(users, "delegate_registered", {"descr": "%s registered." %instance.user.username})
+        notification.send(users, "delegate_registered", {"descr": "%s registered." %instance.username})
 
 post_save.connect(create_profile, sender=User)
 post_save.connect(delegate_registered, sender=User)
