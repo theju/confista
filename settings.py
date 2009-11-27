@@ -147,7 +147,11 @@ INSTALLED_APPS = (
     'staticfiles',
     'debug_toolbar',
     'blog',
+    # Below required for blog
+    'tag_app',
     'tagging',
+    'wiki',
+    'gravatar',
     'django.contrib.markup',
     
     # internal (for now)
