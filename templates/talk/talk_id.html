@@ -1,5 +1,10 @@
 {% extends "site_base.html" %}
 
+{% load i18n %}
+{% load threadedcommentstags %}
+{% load pagination_tags %}
+{% load gravatar %}
+
 {% block subnav %}
 <ul>
   <li><a href="{% url talk_add_talk %}">Add Talk</a></li>
@@ -8,7 +13,6 @@
 
 {% block body %}
 <table>
-{% for talk in talks %}
   <tr>
     <th>Title</th>
     <td>{{ talk.title }}</td>
@@ -46,6 +50,71 @@
     <th>Abstract</th>
     <td>{{ talk.abstract }}</td>
   </tr>
-{% endfor %}
 </table>
+
+{% get_threaded_comment_tree for talk as comments %}
+{% autopaginate comments %}
+
+<ul class="comments">
+  {% for comment in comments %}
+  <li class="{% cycle even,odd %} thread-{{ comment.depth }} clearfix">
+    <div class="meta">
+      <div class="avatar">{% gravatar_img_for_email comment.user.email 40 %}</div>
+      <div class="details"><a href="{% url profile_detail username=comment.user.username %}">{{ comment.user }}</a></div>
+      {{ comment.date_submitted|date }}
+    </div>
+    <div class="bulk">
+      <div class="body">{{ comment.comment|urlize|linebreaks }}</div>
+      {% ifequal user comment.user %}
+      <form method="POST" action="{% url tc_comment_delete comment.object_id %}">
+        <input type="submit" value="{% trans "Delete Comment" %}" />
+        <input type="hidden" name="next" value="{{ request.path }}" />
+      </form>
+      {% endifequal %}
+      <a href="javascript:toggle_comment_form({{ comment.id }})">{% trans "Reply to This Comment" %}</a>
+      <form style="display: none" method="POST" action="{% get_comment_url talk comment %}" id="comment_form_{{ comment.id }}">
+        <table><tr><td><textarea id="id_comment" rows="10" cols="40" name="comment"></textarea></td></tr>
+          <tr><td><input type="submit" value="{% trans "Post Comment" %}" /></td></tr></table>
+        <input type="hidden" name="next" value="{{ request.path }}" />
+      </form>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+
+{% paginate %}
+
+{% if user.is_authenticated %}
+<fieldset class="inlineLabels">
+  <form class="uniForm" method="POST" action="{% get_comment_url talk %}">
+    <div class="ctrlHolder">
+      <label for="id_comment">Comment on the talk</label>
+      <textarea id="id_comment" rows="10" cols="40" name="comment"></textarea>
+    </div>
+    <div class="form_block">
+      <input type="hidden" name="next" value="{{ request.path }}" />
+      <input type="submit" value="{% trans "Post Comment" %}" />
+    </div>
+  </form>
+</fieldset>
+{% else %}
+{% url acct_login as acct_login_url %}
+{% url acct_signup as acct_signup_url %}
+{% blocktrans %}
+<h3>Please <a href="{{ acct_login_url }}">Login</a> (or <a href="{{ acct_signup_url }}">Sign Up</a>) to leave a comment</h3>
+{% endblocktrans %}
+{% endif %}
+
+<script type="text/javascript">
+  function toggle_comment_form(formId) {
+    var commentForm = document.getElementById('comment_form_'+formId);
+    if (commentForm.style.display == 'none') {
+      commentForm.style.display = '';
+    }
+    else {
+      commentForm.style.display = 'none';
+    }
+  }
+</script>
+
 {% endblock %}
