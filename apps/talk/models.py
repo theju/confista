@@ -36,17 +36,17 @@ class Talk(models.Model):
 
 def talk_added(sender, instance=None, **kwargs):
     if notification and kwargs['created']:
-        users = [ii.user for ii in notification.NoticeSetting.objects.filter(notice_type__lable='talk_added')]
+        users = [ii.user for ii in notification.NoticeSetting.objects.filter(notice_type__label='talk_added')]
         notification.send(users, "talk_added", {"descr": "Talk with title \"%s\" added" %instance.title})
 
 def talk_accepted(sender, instance=None, **kwargs):
     if notification and not kwargs['created'] and instance.accepted:
-        users = [ii.user for ii in notification.NoticeSetting.objects.filter(notice_type__lable='talk_accepted')]
+        users = [ii.user for ii in notification.NoticeSetting.objects.filter(notice_type__label='talk_accepted')]
         notification.send(users, "talk_accepted", {"descr": "Talk with title \"%s\" accepted" %instance.title})
 
 def talk_scheduled(sender, instance=None, **kwargs):
     if notification and not kwargs['created'] and instance.scheduled:
-        users = [ii.user for ii in notification.NoticeSetting.objects.filter(notice_type__lable='talk_scheduled')]
+        users = [ii.user for ii in notification.NoticeSetting.objects.filter(notice_type__label='talk_scheduled')]
         notification.send(users, "talk_scheduled", {"descr": "Talk with title \"%s\" scheduled" %instance.title})
 
 models.signals.post_save.connect(talk_added,     sender=Talk)
