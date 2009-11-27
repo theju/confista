@@ -8,8 +8,6 @@ List of items that will improve Confista:
   talks can be easily dragged and dropped rather
   than filling up a form.
 
-* Also add feeds apart from notifications.
-
 * Id-card generation mechanism.
 
 * Probably a CMS instead of using Flatpages.
