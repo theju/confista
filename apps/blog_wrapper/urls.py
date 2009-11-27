@@ -29,4 +29,11 @@ urlpatterns = patterns('',
 
     # 403 Error to users who can't add posts
     (r'^not_authorized/$', direct_to_template, {'template': 'blog/blog_403.html'}),
+
+    # Feeds URL. For specific user
+    url(r'^feed/(?P<username>[-\w]+)/$', 'blog_wrapper.views.feed_user', name='blog_feed_user'),
+
+    # Feeds URL. For all the blogs
+    url(r'^feed/$', 'blog_wrapper.views.feed_all', name='blog_feed_all'),
+
 )
