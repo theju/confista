@@ -16,4 +16,7 @@ urlpatterns = patterns('',
         'basic_profiles.views.profile_edit', 
         {'form_class': DelegateProfileForm}, 
         name='profile_edit'),
+    url(r'^feed/$', 
+        'delegate.views.feed_all', 
+        name='delegate_feed_all'),
 )
