@@ -5,6 +5,8 @@ INSTALL
 Confista_ has only one dependency in Pinax_.
 So, first install_ Pinax_ according to the docs provided.
 
+.. _Confista: http://github.com/theju/confista
+.. _Pinax: http://www.pinaxproject.com/
 .. _install: http://pinaxproject.com/docs/dev/install.html
 
 Plain install
@@ -24,6 +26,7 @@ Plain install
       You might require super-user rights, to install
       the packages.
 
+.. _pip: http://pip.openplans.org/
 
 Install using virtualenv
 -------------------------
@@ -46,12 +49,12 @@ Post-installation
 
     $ python manage.py syncdb
 
-* Run ``runserver`` to fire the development server.
+* Run ``runserver`` to fire the development server.::
 
     $ python manage.py runserver
 
 * [Optional] Load the initial sample data provided with Confista_
-  available under fixtures.
+  available under fixtures.::
 
     $ python manage.py loadata fixtures/initial_data.json
 
