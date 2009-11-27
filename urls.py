@@ -8,7 +8,6 @@ admin.autodiscover()
 
 from account.openid_consumer import PinaxConsumer
 
-from deadline.utils import deadline_expired
 from menu.models import Menu_Item
 
 if settings.ACCOUNT_OPEN_SIGNUP:
