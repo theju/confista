@@ -21,4 +21,4 @@ template_utils==0.4p2
 django-staticfiles==0.1.2
 django-gravatar==0.1.0
 django-atomformat==0.1.1dev
-
+django-threadedcomments==0.5.1
