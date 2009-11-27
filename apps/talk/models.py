@@ -6,6 +6,7 @@ if "notification" in settings.INSTALLED_APPS:
     from notification import models as notification
 else:
     notification = None
+from threadedcomments.models import ThreadedComment
 
 class Topic(models.Model):
     name = models.CharField(max_length = 150)
@@ -49,6 +50,13 @@ def talk_scheduled(sender, instance=None, **kwargs):
         users = [ii.user for ii in notification.NoticeSetting.objects.filter(notice_type__label='talk_scheduled')]
         notification.send(users, "talk_scheduled", {"descr": "Talk with title \"%s\" scheduled" %instance.title})
 
+def talk_comment_added(sender, instance=None, **kwargs):
+    talk = Talk.objects.get(id=instance.object_id)
+    if notification:
+        users = [ii.user for ii in notification.NoticeSetting.objects.filter(notice_type__label='talk_comment_added')]
+        notification.send(users, "talk_comment_added", {"descr": "A comment has been added to the talk with title \"%s\"" %talk.title})
+
 models.signals.post_save.connect(talk_added,     sender=Talk)
 models.signals.post_save.connect(talk_accepted,  sender=Talk)
 models.signals.post_save.connect(talk_scheduled, sender=Talk)
+models.signals.post_save.connect(talk_comment_added, sender=ThreadedComment)
