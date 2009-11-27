@@ -147,12 +147,13 @@ INSTALLED_APPS = (
     'staticfiles',
     'debug_toolbar',
     'blog',
-    # Below required for blog
-    'tag_app',
     'tagging',
     'wiki',
     'gravatar',
+    'threadedcomments',
     'django.contrib.markup',
+    # Below required for blog
+    'tag_app',
     
     # internal (for now)
     'basic_profiles',
