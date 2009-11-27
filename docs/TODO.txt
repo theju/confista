@@ -12,14 +12,14 @@ List of items that will improve Confista:
 
 * Probably a CMS instead of using Flatpages.
 
-* Talk Tag-clouds
+* Talk Tag-clouds and also general tags
 
 * Comments (Threaded-comment is already available in Pinax).
 
 * Admin actions for some common processes. Requires latest
   django.
 
-* Some design changes. Probably a new logo.
+* Some design changes. Definitely a new logo.
 
 * Wiki. Pinax already has a wiki but most conferences might
   require powerful wikis. To be frank, I haven't used the 
