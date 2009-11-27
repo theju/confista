@@ -1,8 +1,10 @@
 from talk.models import Talk
 from talk.forms import TalkForm
+from talk.feeds import TalkFeed
 from django.template import RequestContext
 from deadline.utils import deadline_expired
 from django.shortcuts import render_to_response
+from django.contrib.syndication.views import feed
 from django.contrib.auth.decorators import login_required
 
 def render(request, template, context_dict=None):
@@ -31,3 +33,9 @@ def add_talk(request):
     else:
         talk_form = TalkForm(user=request.user)
     return render(request, 'talk/talk_form.html', {'form': talk_form})
+
+def feed_all(request):
+    url = "feed/"
+    return feed(request, url, {
+            "feed": TalkFeed,
+            })
