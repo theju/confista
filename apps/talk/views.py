@@ -14,12 +14,14 @@ def render(request, template, context_dict=None):
 
 def list(request, id=None):
     if id:
-        talks = [Talk.objects.get(id=id),]
+        talk = Talk.objects.get(id=id)
         template_file = 'talk/talk_id.html'
+        context_dict = {'talk': talk}
     else:
         talks = Talk.objects.all()
         template_file = 'talk/talk_list.html'
-    return render(request, template_file, {'talks': talks})
+        context_dict = {'talks': talks}
+    return render(request, template_file, context_dict)
 
 @deadline_expired("talk_submission")
 @login_required
