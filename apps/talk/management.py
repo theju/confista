@@ -18,6 +18,10 @@ if "notification" in settings.INSTALLED_APPS:
                                         _("Talk scheduled"),
                                         _("a talk has been scheduled"), 
                                         default = 2)
+        notification.create_notice_type("talk_comment_added", 
+                                        _("Talk comment"),
+                                        _("a comment has been posted on a talk"), 
+                                        default = 2)
 
     signals.post_syncdb.connect(create_notice_types, sender=notification)
 else:
